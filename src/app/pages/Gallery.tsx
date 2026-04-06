@@ -4,7 +4,7 @@ import { ArrowLeft, X, Share2, Clock, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import Masonry from 'react-responsive-masonry';
 import * as Dialog from '@radix-ui/react-dialog';
-import { API_URL } from '../../services/api';
+import { getPhotos } from '../../services/api';
 
 interface Photo {
   id: string;
@@ -23,8 +23,7 @@ export default function Gallery() {
   useEffect(() => {
     const loadPhotos = async () => {
       try {
-        const res = await fetch(`${API_URL}/photos`);
-        const data = await res.json();
+        const data = await getPhotos();
 
         const mapped: Photo[] = data.map((p: any) => ({
           id: p.id,

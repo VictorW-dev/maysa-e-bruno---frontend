@@ -4,7 +4,7 @@ import { Camera, Upload as UploadIcon, X, Check, ArrowLeft, Heart } from 'lucide
 import { motion, AnimatePresence } from 'motion/react';
 import * as Progress from '@radix-ui/react-progress';
 import * as Checkbox from '@radix-ui/react-checkbox';
-import { API_URL } from '../services/api';
+import { uploadPhoto } from '../../services/api';
 
 interface PhotoPreview {
   id: string;
@@ -12,8 +12,6 @@ interface PhotoPreview {
   preview: string;
 }
 
-// Constantes para evitar strings soltas
-const API_URL = 'http://localhost:3333/api/upload';
 const MAX_PHOTOS = 10; // exemplo, pode ajustar
 
 export default function Upload() {
@@ -100,14 +98,7 @@ export default function Upload() {
         formData.append('guestName', guestName.trim() || 'Anônimo');
         formData.append('message', message.trim() || '');
 
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          body: formData,
-        });
-
-        if (!response.ok) {
-          throw new Error('Erro no upload');
-        }
+        await uploadPhoto(formData);
 
         const progress = Math.round(((i + 1) / photos.length) * 100);
         setUploadProgress(progress);
