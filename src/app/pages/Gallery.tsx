@@ -4,7 +4,7 @@ import { ArrowLeft, X, Share2, Clock, Star } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import Masonry from 'react-responsive-masonry';
 import * as Dialog from '@radix-ui/react-dialog';
-import { API_URL } from '../services/api';
+import { API_URL } from '../../services/api';
 
 interface Photo {
   id: string;
